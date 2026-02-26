@@ -1,0 +1,48 @@
+# awen-web .github/workflows/build.yml 스타일: 문서 사이트 빌드
+name: Build Docs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build Docusaurus
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [22]
+
+    steps:
+      - name: Set Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'npm'
+
+      - uses: actions/checkout@v4
+
+      # 클라우드명: awen-web frontend의 VITE_APP_TITLE과 동일하게 맞추기 (Repository variable SITE_TITLE 또는 기본값)
+      - name: Set site title
+        run: |
+          SITE_TITLE="${{ vars.SITE_TITLE }}"
+          if [ -z "$SITE_TITLE" ]; then SITE_TITLE="AWEN Cloud"; fi
+          echo "SITE_TITLE=$SITE_TITLE" >> $GITHUB_ENV
+
+      - name: Set base URL (optional)
+        run: |
+          BASE_URL="${{ vars.BASE_URL }}"
+          if [ -n "$BASE_URL" ]; then echo "BASE_URL=$BASE_URL" >> $GITHUB_ENV; fi
+
+      - name: Install and build
+        run: |
+          npm ci
+          npm run build
+          ls -al build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: build/

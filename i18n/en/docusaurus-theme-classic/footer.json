@@ -1,0 +1,14 @@
+{
+  "title": {
+    "message": "Docs",
+    "description": "Footer title"
+  },
+  "link.item.label.Get Started": {
+    "message": "Get Started",
+    "description": "Footer link"
+  },
+  "copyright": {
+    "message": "Copyright © {{year}}.",
+    "description": "Footer copyright"
+  }
+}

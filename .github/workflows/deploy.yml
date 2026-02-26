@@ -1,0 +1,64 @@
+# awen-web .github/workflows/deploy.yml 참고: 빌드 후 GitHub Pages 배포
+name: Deploy Docs to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+# GitHub Pages 배포 권한
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - uses: actions/checkout@v4
+
+      - name: Set site title
+        run: |
+          SITE_TITLE="${{ vars.SITE_TITLE }}"
+          if [ -z "$SITE_TITLE" ]; then SITE_TITLE="AWEN Cloud"; fi
+          echo "SITE_TITLE=$SITE_TITLE" >> $GITHUB_ENV
+        id: env
+
+      - name: Set base URL (optional, for project pages e.g. /awen-docs/)
+        run: |
+          BASE_URL="${{ vars.BASE_URL }}"
+          if [ -n "$BASE_URL" ]; then echo "BASE_URL=$BASE_URL" >> $GITHUB_ENV; fi
+
+      - name: Install and build
+        run: |
+          npm ci
+          npm run build
+          ls -al build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deploy
+        uses: actions/deploy-pages@v4

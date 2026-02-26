@@ -1,0 +1,47 @@
+{
+  "docsSidebar": [
+    "intro",
+    {
+      "type": "category",
+      "label": "📘 Developer",
+      "collapsed": false,
+      "link": {
+        "type": "generated-index",
+        "title": "Developer",
+        "description": "API, deployment, and integration guides."
+      },
+      "items": [
+        "getting-started/quick-start",
+        "developer/quickstart",
+        "developer/api",
+        "developer/deploy"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "👤 User Manual",
+      "link": {
+        "type": "generated-index",
+        "title": "User Manual",
+        "description": "How to use each screen."
+      },
+      "items": [
+        "user/dashboard",
+        "user/hosting",
+        "user/ai-assistant",
+        "user/billing",
+        "user/tool",
+        "user/cs",
+        "user/account"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "📌 Reference",
+      "items": [
+        "reference/faq",
+        "reference/changelog"
+      ]
+    }
+  ]
+}
