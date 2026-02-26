@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'npm'
+          # cache: 'npm' 사용 시 package-lock.json 필요. lock 파일 커밋 후 cache 활성화 권장.
 
       - uses: actions/checkout@v4
 
@@ -42,7 +42,7 @@ jobs:
 
       - name: Install and build
         run: |
-          npm ci
+          npm install
           npm run build
           ls -al build
 

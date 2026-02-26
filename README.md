@@ -2,6 +2,11 @@
 
 Docusaurus로 만든 GitBook 스타일의 제품 매뉴얼입니다. 사이트 제목·푸터 등에는 빌드 시 `SITE_TITLE`(또는 `VITE_APP_TITLE`) 환경 변수가 사용됩니다. awen-web frontend와 동일한 클라우드명을 쓰려면 같은 값을 설정하면 됩니다.
 
+**배포 URL** (GitHub Pages 배포 후):  
+- 프로젝트 사이트: `https://<org 또는 user>.github.io/awen-docs/`  
+- 유저/조직 사이트: `https://<org 또는 user>.github.io`  
+→ 실제 주소는 저장소 **Settings → Pages**에서 확인할 수 있습니다.
+
 ## 구조
 
 - **docs/** – 문서 소스 (Markdown)
@@ -77,6 +82,8 @@ npm run serve
 
 GitHub Pages 사용 시 Repository **Settings → Pages → Build and deployment → Source**에서 **GitHub Actions**를 선택해야 합니다. 클라우드명을 바꾸려면 Repository **Settings → Secrets and variables → Actions**에서 변수 `SITE_TITLE`을 설정하면 됩니다.
 
+**Lock 파일**: CI는 `npm install`로 동작합니다. 재현 가능한 빌드와 캐시를 쓰려면 `package-lock.json`을 커밋한 뒤 워크플로에서 `cache: 'npm'`을 켜고 `npm ci`로 바꾸면 됩니다.
+
 ## 실제 배포 (프로덕션)
 
 ### 1. GitHub Pages (기본 구성)
@@ -89,7 +96,12 @@ GitHub Pages 사용 시 Repository **Settings → Pages → Build and deployment
 2. **main에 push**  
    `main` 브랜치에 push 하면 자동으로 `npm run build` 후 GitHub Pages에 배포됩니다.
 
-3. **접속 주소**
+3. **배포 URL**
+   - 배포가 끝나면 **Settings → Pages** 상단에 표시되는 주소로 접속합니다.
+   - **프로젝트 사이트**: `https://<user 또는 org>.github.io/awen-docs/` (한국어 `/`, 영어 `/en/`)
+   - **유저/조직 사이트**: `https://<user 또는 org>.github.io` (루트에 배포한 경우)
+
+4. **접속 주소 (baseUrl 설정)**
    - **조직/유저 사이트** (예: `awen.github.io`):  
      루트에 배포하면 `https://<user 또는 org>.github.io` 로 접속합니다.  
      이 경우 `BASE_URL` 변수를 두지 않으면 기본값 `baseUrl: '/'` 로 빌드됩니다.
@@ -98,7 +110,7 @@ GitHub Pages 사용 시 Repository **Settings → Pages → Build and deployment
      **Settings → Secrets and variables → Actions → Variables** 에서 `BASE_URL` = `/awen-docs/` (끝에 슬래시 포함) 를 추가합니다.  
      빌드 시 이 값이 `baseUrl` 로 사용됩니다.
 
-4. **선택 설정**
+5. **선택 설정**
    - **사이트 제목**: Variables 에 `SITE_TITLE` 설정 (예: `AWEN Cloud`).
    - **실제 도메인 URL**: 배포된 문서 주소를 고정하고 싶다면 Variables 에 `DOCS_SITE_URL` 설정 (예: `https://docs.example.com`).  
      `docusaurus.config.js` 의 `url` 이 이 값으로 설정되면, 빌드 결과의 canonical/OG URL 이 해당 주소로 나갑니다.

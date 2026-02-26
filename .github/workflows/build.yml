@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-          cache: 'npm'
+          # cache: 'npm' 사용 시 package-lock.json 필요
 
       - uses: actions/checkout@v4
 
@@ -38,7 +38,7 @@ jobs:
 
       - name: Install and build
         run: |
-          npm ci
+          npm install
           npm run build
           ls -al build
 
