@@ -52,6 +52,8 @@
   사이트 제목은 Variables의 `SITE_TITLE`로 지정(예: AWEN Cloud).
 
   **배포 시 "Creating Pages deployment failed" / 404가 나면**: 저장소 **Settings → [Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)** 로 가서 **Build and deployment → Source**를 **GitHub Actions**로 선택한 뒤 저장하세요. Source가 "Deploy from a branch"이거나 비어 있으면 이 오류가 납니다.
+
+  **"Your Docusaurus site did not load properly" / baseUrl 경고가 나오면**: 접속 주소가 `username.github.io/awen-docs/` 형태(프로젝트 페이지)인데 빌드 시 `baseUrl`이 `/`이면 발생합니다. **Settings → Secrets and variables → Actions → Variables**에서 `BASE_URL` = `/awen-docs/` 를 추가한 뒤 워크플로를 다시 실행하세요.
 - **비공개 저장소**: GitHub Free에서는 비공개 저장소에 Pages를 켤 수 없습니다. 공개 repo로 두거나, Pro 이상에서 비공개 repo Pages를 사용하거나, Netlify/Vercel 등으로 빌드 결과만 배포하면 됩니다.
 - **Lock 파일**: CI는 `npm install`로 동작합니다. `package-lock.json`을 커밋한 뒤 워크플로에서 `cache: 'npm'`과 `npm ci`를 사용하면 재현 가능한 빌드와 캐시를 쓸 수 있습니다.
 
