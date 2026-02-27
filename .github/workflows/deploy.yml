@@ -35,10 +35,10 @@ jobs:
           echo "SITE_TITLE=$SITE_TITLE" >> $GITHUB_ENV
         id: env
 
-      - name: Set base URL (optional, for project pages e.g. /awen-docs/)
+      - name: Set base URL (optional, for project pages e.g. /docs/)
         run: |
           BASE_URL="${{ vars.BASE_URL }}"
-          if [ -z "$BASE_URL" ]; then BASE_URL="/awen-docs/"; fi
+          if [ -z "$BASE_URL" ]; then BASE_URL="/docs/"; fi
           echo "BASE_URL=$BASE_URL" >> $GITHUB_ENV
 
       - name: Install and build

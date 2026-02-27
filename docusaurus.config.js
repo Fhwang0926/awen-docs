@@ -15,7 +15,7 @@ const config = {
   baseUrl,
 
   organizationName: 'awen',
-  projectName: 'awen-docs',
+  projectName: 'docs',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
