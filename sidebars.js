@@ -32,6 +32,7 @@ const sidebars = {
       items: [
         'user/dashboard',
         'user/hosting',
+        'user/ai-features',
         'user/ai-assistant',
         'user/billing',
         'user/tool',

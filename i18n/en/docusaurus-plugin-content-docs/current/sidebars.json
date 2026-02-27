@@ -3,7 +3,7 @@
     "intro",
     {
       "type": "category",
-      "label": "ğŸ“˜ Developer",
+      "label": "?“˜ Developer",
       "collapsed": false,
       "link": {
         "type": "generated-index",
@@ -19,7 +19,7 @@
     },
     {
       "type": "category",
-      "label": "ğŸ‘¤ User Manual",
+      "label": "?‘¤ User Manual",
       "link": {
         "type": "generated-index",
         "title": "User Manual",
@@ -28,7 +28,7 @@
       "items": [
         "user/dashboard",
         "user/hosting",
-        "user/ai-assistant",
+        "user/ai-features","user/ai-assistant",
         "user/billing",
         "user/tool",
         "user/cs",
@@ -37,7 +37,7 @@
     },
     {
       "type": "category",
-      "label": "ğŸ“Œ Reference",
+      "label": "?“Œ Reference",
       "items": [
         "reference/faq",
         "reference/changelog"
